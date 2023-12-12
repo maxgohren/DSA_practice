@@ -42,16 +42,65 @@ int recursiveGlobalVar(int n)
     return 0;
 }
 
+void treeRecursion(int n)
+{
+    if (n > 0)
+    {
+        printf("%d", n);
+        treeRecursion(n - 1);
+        treeRecursion(n - 1);
+    }
+}
+
+void indirectRecursionB(int n);
+
+void indirectRecursionA(int n) 
+{
+    if (n > 0)
+    {
+        printf("%d\n", n);
+        indirectRecursionB(n-1);
+    }
+}
+
+void indirectRecursionB(int n)
+{
+    if (n > 1)
+    {
+        printf("%d\n", n);
+        indirectRecursionA(n / 2);
+    }
+}
+
+int nestedRecursion(int n)
+{
+    if (n > 100)
+        return n - 10;
+    return nestedRecursion(nestedRecursion(n + 11));
+}
+
+
+
 int main()
 {
-    int r = 0;
-    //recursiveAscending(x);
-    //recursiveDescending(x);
+    
+    //recursiveAscending(3);
+    //recursiveDescending(3);
     
     /* --- the following are the same --- */
+    //int r = 0;
     //r = recursiveStaticVar (5);
-    r = recursiveGlobalVar(5);
+    //r = recursiveGlobalVar(5);
+    //printf("%d\n", r);
 
-    printf("%d\n", r);
+    //treeRecursion(3);
+
+    //indirectRecursionA(20);
+
+    int r = 95;
+    r = nestedRecursion(r);
+    printf("%d", r);
+
+    
     return 0;
 }
