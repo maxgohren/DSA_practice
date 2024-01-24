@@ -10,6 +10,13 @@ struct Array {
     int length;
 };
 
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
 int Get(struct Array arr, int index)
 {
     if(index>=0 && index<arr.length)
@@ -59,6 +66,28 @@ int Sum(struct Array arr)
 float Avg(struct Array arr)
 {
   return (float)Sum(arr)/arr.length;
+}
+
+void ReverseCopy(struct Array *arr)
+{
+    int *B;
+    int i=0,j=0;
+    
+    B = (int *)malloc(arr->length*sizeof(int));
+    
+    for(i = arr->length-1, j=0; i>=0; i--,j++)
+        B[j] = arr->A[i];
+    for(i = 0; i<arr->length; i++)
+        arr->A[i] = B[i];
+}
+
+void ReverseSwap(struct Array *arr)
+{
+    int i=0, j=0;
+    for(i = 0, j = arr->length-1; i<j;i++,j--)
+    {
+        swap(&arr->A[i], &arr->A[j]);
+    }
 }
 
 void Display(struct Array arr)
@@ -124,19 +153,42 @@ int main()
     /* 2D Arrays */
 
     /* Array ADT Methods */
+    /*
     struct Array arr = {{2,3,4,5,6}, 10,5};
     
-
     Set(&arr, 0, 15);
     Display(arr);
     cout << "Max:" << Max(arr) << endl;
     cout << "Min:" << Min(arr) << endl;
     cout << "Avg:" << Avg(arr) << endl;
-
+    */
     
-       
-
-
+    /* Reversal of array - copy */
+    /*
+    struct Array A = {{1,2,3,4,5,6,7,8,9}, 9,9};
+    ReverseCopy(&A);
+    Display(A);
+    */
+    
+    /* Reversal of array - swap */
+    /*
+    struct Array A = {{1,2,3,4,5,6,7,8,9}, 9,9};
+    ReverseSwap(&A);
+    Display(A);
+    */
+    
+    /* Shift and Rotation of array */
+    ///*
+    //struct Array A = {{1,2,3,4,5,6,7,8,9}, 9,9};
+    
+    //shift: moves data to position left/right. if out of bounds, delete data
+    
+    
+    //rotate: moves data left/right, if out of bounds, wrap around to front/end
+    
+    //*/
+    
+    
+    
     return 0;
 }
-
