@@ -98,6 +98,16 @@ void Display(struct Array arr)
     }
 }
 
+bool isSorted(struct Array arr)
+{
+  for(int i = 0; i < arr.length-1; i++)
+  {
+    if(arr.A[i] > arr.A[i+1])
+      return false;
+  }
+  return true;
+}
+
 int main()
 {
     /* types of declarations */
@@ -178,16 +188,14 @@ int main()
     */
     
     /* Shift and Rotation of array */
-    ///*
-    //struct Array A = {{1,2,3,4,5,6,7,8,9}, 9,9};
-    
+    /*
+    struct Array A = {{1,2,3,4,5,6,7,8,9}, 9,9};
     //shift: moves data to position left/right. if out of bounds, delete data
-    
-    
     //rotate: moves data left/right, if out of bounds, wrap around to front/end
+    */
+    struct Array A = {{1,2,3,4,5,6,7,8,9}, 9,9};
     
-    //*/
-    
+    cout << isSorted(A) << endl;
     
     
     return 0;
