@@ -4,11 +4,20 @@
 
 using namespace std;
 
-struct Array {
-    int A[10];
+struct Array
+{
+    int *A;
     int size;
     int length;
 };
+
+
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
 
 int Get(struct Array arr, int index)
 {
@@ -25,118 +34,292 @@ void Set(struct Array *arr, int index, int x)
 
 int Max(struct Array arr)
 {
-  int max=arr.A[0];
-  int i;
-  for(i=1;i<arr.length;i++)
-  {
-    if(arr.A[i]>max)
-      max=arr.A[i];
-  }
-  return max;
+    int max=arr.A[0];
+    int i;
+    for(i=1;i<arr.length;i++)
+    {
+      if(arr.A[i]>max)
+        max=arr.A[i];
+    }
+    return max;
 }
 
 int Min(struct Array arr)
 {
-  int min=arr.A[0];
-  int i;
-  for(i=1;i<arr.length;i++)
-  {
-    if(arr.A[i]<min)
-      min=arr.A[i];
-  }
-  return min;
+    int min=arr.A[0];
+    int i;
+    for(i=1;i<arr.length;i++)
+    {
+        if(arr.A[i]<min)
+            min=arr.A[i];
+    }
+    return min;
 }
 
 int Sum(struct Array arr)
 {
-  int s=0;
-  int i;
-  for(i=0;i<arr.length;i++)
-      s+=arr.A[i];
-  return s;
+    int s=0;
+    int i;
+    for(i=0;i<arr.length;i++)
+        s+=arr.A[i];
+    return s;
 }
 
 float Avg(struct Array arr)
 {
-  return (float)Sum(arr)/arr.length;
+    return (float)Sum(arr)/arr.length;
 }
 
 void Display(struct Array arr)
 {
     for(int i = 0; i<arr.length;i++)
     {
-        printf("%d\n", arr.A[i]);
+        printf("%d ", arr.A[i]);
     }
+    printf("\n");
+}
+
+void InsertSort(struct Array *arr, int x)
+{
+    int i = arr->length-1;
+    if (arr->length == arr->size)
+        return;
+    while(i >= 0 && arr->A[i] > x)
+    {
+        arr->A[i+1] = arr->A[i];
+        i--;
+    }
+    arr->A[i+1]=x;
+    arr->length++;
+}
+
+int isSorted(struct Array arr)
+{
+    int i = 0;
+    for(i = 0; i < arr.length-1; i++)
+    {
+        if(arr.A[i] > arr.A[i+1])
+            return 0;
+    }
+    return 1;
+}
+
+void Rearrange(struct Array *arr)
+{
+    int i, j;
+    i = 0;
+    j = arr->length-1;
+    
+    while ( i < j)
+    {
+        while(arr->A[i] < 0) i++;
+        while(arr->A[j] >= 0) j--;
+        if(i < j) swap(&arr->A[i], &arr->A[j]);
+    }
+}
+
+struct Array* Merge(struct Array A, struct Array B)
+{
+    int i = 0;
+    int j = 0;
+    int k = 0;
+
+    struct Array *C = (struct Array *)malloc(sizeof(struct Array));
+
+    while( i < A.length && j < B.length)
+    { 
+        if(A.A[i] < B.A[j])
+            C->A[k++] = A.A[i++];
+        else
+            C->A[k++] = B.A[j++];
+    }
+    for( ; i < A.length ; i++)
+        C->A[k++] = A.A[i];
+    for( ; j < B.length ; j++)
+        C->A[k++] = A.A[j];
+   
+    C->length = A.length + B.length;
+    C->size = 10; 
+
+    return C;
+}
+
+struct Array* Union(struct Array A, struct Array B)
+{
+    int i = 0;
+    int j = 0;
+    int k = 0;
+
+    struct Array *C = (struct Array *)malloc(sizeof(struct Array));
+
+    while( i < A.length && j < B.length)
+    { 
+        if(A.A[i] < B.A[j])
+            C->A[k++] = A.A[i++];
+        else if(B.A[j] < A.A[i])
+            C->A[k++] = B.A[j++];
+        else{ 
+            C->A[k++] = A.A[i++];
+            j++;
+        }
+    }
+
+    for( ; i < A.length ; i++)
+        C->A[k++] = A.A[i];
+    for( ; j < B.length ; j++)
+        C->A[k++] = A.A[j];
+   
+    C->length = k;
+    C->size = 10; 
+
+    return C;
+}
+
+struct Array* Intersection(struct Array A, struct Array B)
+{
+    int i = 0;
+    int j = 0;
+    int k = 0;
+
+    struct Array *C = (struct Array *)malloc(sizeof(struct Array));
+
+    while( i < A.length && j < B.length)
+    {
+        if(A.A[i] < B.A[j])
+            i++;
+        else if(B.A[j] < A.A[i])
+            j++;
+        else{
+            C->A[k++] = A.A[i++];
+            j++;
+        }
+    }
+
+    C->length = k;
+    C->size = 10;
+
+    return C;
+}
+
+struct Array* Difference(struct Array A, struct Array B)
+{
+    int i = 0;
+    int j = 0;
+    int k = 0;
+
+    struct Array *C = (struct Array *)malloc(sizeof(struct Array));
+
+    while( i < A.length && j < B.length)
+    {
+        if(A.A[i] < B.A[j])
+            C->A[k++] = A.A[i++];
+        else if(B.A[j] < A.A[i])
+            j++;
+        else{ 
+            i++;
+            j++;
+        }
+    }
+
+    for( ; i < A.length ; i++)
+        C->A[k++] = A.A[i];
+
+    C->length = k;
+    C->size = 10;
+
+    return C;
+}
+
+int Search(struct Array A, int key)
+{
+    int l, m, h;
+    l = 0;
+    h = A.length - 1;
+    while(l <= h)
+    {
+        m = (l + h) / 2;
+        if(key == A.A[m])
+            return m;
+        if(key < A.A[m])
+            h = m - 1;
+        else if(key > A.A[m])
+            l = m + 1;
+    }
+    return -1;
+}
+         
+        
+int Delete(struct Array *A, int index)
+{
+    int x = 0;
+    int i;
+
+    if(index >= 0 && index < A->length)
+    {
+        x = A->A[index];
+        for(i = index; i < A->length-1; i++)
+            A->A[i] = A->A[i+1];
+        A->length--;
+        return x;
+    }
+
+    return 0;
 }
 
 int main()
 {
-    /* types of declarations */
-    /*
-    //view these declarations in variable viewer when debugging
-    int A[5]; //garbage values
-    int B[5] = { 1,2,3,4,5 };
-    int C[10] = { 2,4,6 }; //0 padded array
-    int D[5] = { 0 }; //0 padded array
-    int E[] = { 1,2,3,4,5,6 };
+    struct Array A;
+    int ch = 0;
+    int x, index;
 
-    // this works because compiler knows static array size
-    int sizeA = sizeof(A) / sizeof(int);
-    for (int i = 0; i < sizeA; i++) printf("%u\n", &A[i]);
-    */
+    printf("Enter size of Array A: ");
+    scanf("%d", &A.size);
+    A.A = (int *)malloc(A.size * sizeof(int));
+    A.length = A.size;
 
-    /* static vs dynamic arrays */ 
-    /*
-    int staticArray[10] = { 0 };
-    int* dynamicArray;
-    dynamicArray = (int*)malloc(10 * sizeof(int));
+    printf("Menu\n");
+    printf("1. Insert\n");
+    printf("2. Delete\n");
+    printf("3. Search\n");
+    printf("4. Sum\n");
+    printf("5. Display\n");
+    printf("6. Exit\n");
+
+    while(ch < 6 )
+    { 
+        printf("Enter your choice: ");
+        scanf("%d", &ch);
+        
+        switch(ch)
+        {
+            case 1: printf("Enter an element and index ");
+                   scanf("%d%d", &x, &index);
+                   Set(&A, index, x); 
+                   Display(A);
+                   break;
+            case 2: printf("Enter an index to delete ");
+                   scanf("%d", &index);
+                   Delete(&A, index); 
+                   Display(A);
+                   break;
+            case 3: printf("Enter an element to search for");
+                   scanf("%d", &x);
+                   index = Search(A, x);  
+                   if(index != -1)
+                       cout << "Element " << x << " was found at index: " << index << endl;
+                   else
+                       cout << "Element " << x << " was not found" << endl;
+                   break;
+            case 4: printf("The sum of A: ");
+                   x = Sum(A); 
+                   cout << x << endl;
+                   break;
+            case 5: printf("Elements are: \n"); 
+                   Display(A);
+        } 
+    }
+               
     
-    // does not work, compiler does not know size of run-time arrays
-    //int size = sizeof(dynamicArray) / sizeof(int);
-    for (int i = 0; i < 10; i++)
-        dynamicArray[i] = i * 2;
-    
-    for (int i = 0; i < 10; i++)
-        printf("%d %d\n", dynamicArray[i], staticArray[i]);
-    */
-
-    /* Resizing an array */
-    /*
-    int* p, * q;
-
-    p = (int*)malloc(5 * sizeof(int));
-    p[0] = 3; p[1] = 5; p[2] = 7; p[3] = 9; p[4] = 11;
-
-    q = (int*)malloc(10 * sizeof(int));
-    
-    for (int i = 0; i < 5; i++)
-        q[i] = p[i];
-
-    
-    free(p); //tells run-time that this memory can be overwritten, does not delete
-    p = q;
-    q = NULL;
-
-    for (int i = 0; i < 5; i++)
-        printf("%d\n", p[i]);
-    */
-
-    /* 2D Arrays */
-
-    /* Array ADT Methods */
-    struct Array arr = {{2,3,4,5,6}, 10,5};
-    
-
-    Set(&arr, 0, 15);
-    Display(arr);
-    cout << "Max:" << Max(arr) << endl;
-    cout << "Min:" << Min(arr) << endl;
-    cout << "Avg:" << Avg(arr) << endl;
-
-    
-       
-
-
     return 0;
 }
 
