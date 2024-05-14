@@ -47,6 +47,8 @@ void Display();
 void InsertSort(int x);
 int isSorted();
 void Rearrange();
+void ReverseCopy();
+void ReverseSwap();
 Array* Merge(Array B);
 Array* Union(Array B);
 Array* Intersection(Array B);
@@ -56,18 +58,7 @@ int Delete(int index);
 
 };
 
-<<<<<<< HEAD
 int Array::Get(int index)
-=======
-void swap(int *a, int *b)
-{
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-int Get(struct Array arr, int index)
->>>>>>> 101be990b0f2003f39921b2748a9eae751c7e45c
 {
     if(index>=0 && index<length)
             return A[index];
@@ -96,6 +87,7 @@ int Array::Max()
 
 int Array::Min()
 {
+
     int min=A[0];
     int i;
     for(i=1;i<length;i++)
@@ -120,33 +112,28 @@ float Array::Average()
     return (float)Sum()/length;
 }
 
-<<<<<<< HEAD
-void Array::Display()
-=======
-void ReverseCopy(struct Array *arr)
+
+void Array::ReverseCopy()
 {
-    int *B;
+    Array B;
     int i=0,j=0;
     
-    B = (int *)malloc(arr->length*sizeof(int));
-    
-    for(i = arr->length-1, j=0; i>=0; i--,j++)
-        B[j] = arr->A[i];
-    for(i = 0; i<arr->length; i++)
-        arr->A[i] = B[i];
+    for(i = length-1, j=0; i>=0; i--,j++)
+        B.A[j] = A[i];
+    for(i = 0; i < length; i++)
+        A[i] = B.A[i];
 }
 
-void ReverseSwap(struct Array *arr)
+void Array::ReverseSwap()
 {
     int i=0, j=0;
-    for(i = 0, j = arr->length-1; i<j;i++,j--)
+    for(i = 0, j = length-1; i<j;i++,j--)
     {
-        swap(&arr->A[i], &arr->A[j]);
+        swap(&A[i], &A[j]);
     }
 }
 
-void Display(struct Array arr)
->>>>>>> 101be990b0f2003f39921b2748a9eae751c7e45c
+void Array::Display()
 {
     for(int i = 0; i < length;i++)
     {
@@ -155,21 +142,18 @@ void Display(struct Array arr)
     printf("\n");
 }
 
-<<<<<<< HEAD
-void Array::InsertSort(int x)
-=======
-bool isSorted(struct Array arr)
-{
-  for(int i = 0; i < arr.length-1; i++)
-  {
-    if(arr.A[i] > arr.A[i+1])
-      return false;
-  }
-  return true;
-}
 
-int main()
->>>>>>> 101be990b0f2003f39921b2748a9eae751c7e45c
+//bool Array::isSorted()
+//{
+//  for(int i = 0; i < length-1; i++)
+//  {
+//    if(A[i] > A[i+1])
+//      return false;
+//  }
+//  return true;
+//}
+
+void Array::InsertSort(int x)
 {
     int i = length-1;
     if (length == size)
@@ -208,7 +192,7 @@ void Array::Rearrange()
     }
 }
 
-Array* Array::Merge(struct Array B)
+Array* Array::Merge(Array B)
 {
     int i = 0;
     int j = 0;
@@ -235,14 +219,13 @@ Array* Array::Merge(struct Array B)
     return C;
 }
 
-struct Array* Array::Union(struct Array B)
+Array* Array::Union(Array B)
 {
     int i = 0;
     int j = 0;
     int k = 0;
 
-<<<<<<< HEAD
-    struct Array *C = (struct Array *)malloc(sizeof(struct Array));
+    Array *C;
 
     while( i < length && j < B.length)
     {
@@ -267,7 +250,7 @@ struct Array* Array::Union(struct Array B)
     return C;
 }
 
-Array* Array::Intersection(struct Array B)
+Array* Array::Intersection(Array B)
 {
     int i = 0;
     int j = 0;
@@ -411,44 +394,5 @@ int main()
                    A.Display();
         } 
     }
-               
-=======
-    /* Array ADT Methods */
-    /*
-    struct Array arr = {{2,3,4,5,6}, 10,5};
-    
-    Set(&arr, 0, 15);
-    Display(arr);
-    cout << "Max:" << Max(arr) << endl;
-    cout << "Min:" << Min(arr) << endl;
-    cout << "Avg:" << Avg(arr) << endl;
-    */
-    
-    /* Reversal of array - copy */
-    /*
-    struct Array A = {{1,2,3,4,5,6,7,8,9}, 9,9};
-    ReverseCopy(&A);
-    Display(A);
-    */
-    
-    /* Reversal of array - swap */
-    /*
-    struct Array A = {{1,2,3,4,5,6,7,8,9}, 9,9};
-    ReverseSwap(&A);
-    Display(A);
-    */
-    
-    /* Shift and Rotation of array */
-    /*
-    struct Array A = {{1,2,3,4,5,6,7,8,9}, 9,9};
-    //shift: moves data to position left/right. if out of bounds, delete data
-    //rotate: moves data left/right, if out of bounds, wrap around to front/end
-    */
-    struct Array A = {{1,2,3,4,5,6,7,8,9}, 9,9};
-    
-    cout << isSorted(A) << endl;
-    
->>>>>>> 101be990b0f2003f39921b2748a9eae751c7e45c
-    
     return 0;
 }
