@@ -4,13 +4,13 @@
 
 using namespace std;
 
-struct Array
+class Array
 {
+
+private:
     int *A;
     int size;
     int length;
-};
-
 
 void swap(int *a, int *b)
 {
@@ -19,132 +19,172 @@ void swap(int *a, int *b)
     *b = temp;
 }
 
-int Get(struct Array arr, int index)
+public:
+    Array()
+    {
+        size = 10;
+        length = 10;
+        A = new int[size];
+    }
+    Array(int sz)
+    {
+        size = sz;
+        length = sz;
+        A = new int[size];
+    }
+    ~Array()
+    {
+        delete []A;
+    }
+
+int Get(int index);
+void Set(int index, int x);
+int Max();
+int Min();
+int Sum();
+float Average();
+void Display();
+void InsertSort(int x);
+int isSorted();
+void Rearrange();
+Array* Merge(Array B);
+Array* Union(Array B);
+Array* Intersection(Array B);
+Array* Difference(Array B);
+int Search(int key);
+int Delete(int index);
+
+};
+
+int Array::Get(int index)
 {
-    if(index>=0 && index<arr.length)
-            return arr.A[index];
+    if(index>=0 && index<length)
+            return A[index];
     return -1;
 }
 
-void Set(struct Array *arr, int index, int x)
+void Array::Set(int index, int x)
 {
-    if(index>=0 && index<arr->length)
-        arr->A[index] = x;
+    if(index>=0 && index<length)
+    {
+        A[index] = x;
+    }    
 }
 
-int Max(struct Array arr)
+int Array::Max()
 {
-    int max=arr.A[0];
+    int max=A[0];
     int i;
-    for(i=1;i<arr.length;i++)
+    for(i=1;i<length;i++)
     {
-      if(arr.A[i]>max)
-        max=arr.A[i];
+      if(A[i]>max)
+        max=A[i];
     }
     return max;
 }
 
-int Min(struct Array arr)
+int Array::Min()
 {
-    int min=arr.A[0];
+    int min=A[0];
     int i;
-    for(i=1;i<arr.length;i++)
+    for(i=1;i<length;i++)
     {
-        if(arr.A[i]<min)
-            min=arr.A[i];
+        if(A[i]<min)
+            min=A[i];
     }
     return min;
 }
 
-int Sum(struct Array arr)
+int Array::Sum()
 {
     int s=0;
     int i;
-    for(i=0;i<arr.length;i++)
-        s+=arr.A[i];
+    for(i=0;i<length;i++)
+        s+=A[i];
     return s;
 }
 
-float Avg(struct Array arr)
+float Array::Average()
 {
-    return (float)Sum(arr)/arr.length;
+    return (float)Sum()/length;
 }
 
-void Display(struct Array arr)
+void Array::Display()
 {
-    for(int i = 0; i<arr.length;i++)
+    for(int i = 0; i < length;i++)
     {
-        printf("%d ", arr.A[i]);
+        printf("%d ", A[i]);
     }
     printf("\n");
 }
 
-void InsertSort(struct Array *arr, int x)
+void Array::InsertSort(int x)
 {
-    int i = arr->length-1;
-    if (arr->length == arr->size)
+    int i = length-1;
+    if (length == size)
         return;
-    while(i >= 0 && arr->A[i] > x)
+    while(i >= 0 && A[i] > x)
     {
-        arr->A[i+1] = arr->A[i];
+        A[i+1] = A[i];
         i--;
     }
-    arr->A[i+1]=x;
-    arr->length++;
+    A[i+1]=x;
+    length++;
 }
 
-int isSorted(struct Array arr)
+int Array::isSorted()
 {
     int i = 0;
-    for(i = 0; i < arr.length-1; i++)
+    for(i = 0; i < length-1; i++)
     {
-        if(arr.A[i] > arr.A[i+1])
+        if(A[i] > A[i+1])
             return 0;
     }
     return 1;
 }
 
-void Rearrange(struct Array *arr)
+void Array::Rearrange()
 {
     int i, j;
     i = 0;
-    j = arr->length-1;
+    j = length-1;
     
     while ( i < j)
     {
-        while(arr->A[i] < 0) i++;
-        while(arr->A[j] >= 0) j--;
-        if(i < j) swap(&arr->A[i], &arr->A[j]);
+        while(A[i] < 0) i++;
+        while(A[j] >= 0) j--;
+        if(i < j) swap(&A[i], &A[j]);
     }
 }
 
-struct Array* Merge(struct Array A, struct Array B)
+Array* Array::Merge(struct Array B)
 {
     int i = 0;
     int j = 0;
     int k = 0;
 
-    struct Array *C = (struct Array *)malloc(sizeof(struct Array));
+    Array *C;
 
-    while( i < A.length && j < B.length)
-    { 
-        if(A.A[i] < B.A[j])
-            C->A[k++] = A.A[i++];
-        else
+    while( i < length && j < B.length)
+    {
+        if( A[i] < B.A[j] )
+            C->A[k++] = A[i++];
+        else if(B.A[j] < A[i])
             C->A[k++] = B.A[j++];
     }
-    for( ; i < A.length ; i++)
-        C->A[k++] = A.A[i];
+
+    for( ; i < length ; i++)
+        C->A[k++] = A[i];
     for( ; j < B.length ; j++)
-        C->A[k++] = A.A[j];
+        C->A[k++] = B.A[j];
    
-    C->length = A.length + B.length;
+    C->length = length + B.length;
     C->size = 10; 
 
     return C;
 }
 
-struct Array* Union(struct Array A, struct Array B)
+struct Array* Array::Union(struct Array B)
 {
     int i = 0;
     int j = 0;
@@ -152,22 +192,22 @@ struct Array* Union(struct Array A, struct Array B)
 
     struct Array *C = (struct Array *)malloc(sizeof(struct Array));
 
-    while( i < A.length && j < B.length)
-    { 
-        if(A.A[i] < B.A[j])
-            C->A[k++] = A.A[i++];
-        else if(B.A[j] < A.A[i])
+    while( i < length && j < B.length)
+    {
+        if( A[i] < B.A[j] )
+            C->A[k++] = A[i++];
+        else if(B.A[j] < A[i])
             C->A[k++] = B.A[j++];
         else{ 
-            C->A[k++] = A.A[i++];
+            i++;
             j++;
         }
     }
 
-    for( ; i < A.length ; i++)
-        C->A[k++] = A.A[i];
+    for( ; i < length ; i++)
+        C->A[k++] = A[i];
     for( ; j < B.length ; j++)
-        C->A[k++] = A.A[j];
+        C->A[k++] = B.A[j];
    
     C->length = k;
     C->size = 10; 
@@ -175,22 +215,22 @@ struct Array* Union(struct Array A, struct Array B)
     return C;
 }
 
-struct Array* Intersection(struct Array A, struct Array B)
+Array* Array::Intersection(struct Array B)
 {
     int i = 0;
     int j = 0;
     int k = 0;
 
-    struct Array *C = (struct Array *)malloc(sizeof(struct Array));
+    Array *C;
 
-    while( i < A.length && j < B.length)
+    while( i < length && j < B.length)
     {
-        if(A.A[i] < B.A[j])
+        if( A[i] < B.A[j] )
             i++;
-        else if(B.A[j] < A.A[i])
+        else if(B.A[j] < A[i])
             j++;
-        else{
-            C->A[k++] = A.A[i++];
+        else{ 
+            C->A[k++] = A[i++];
             j++;
         }
     }
@@ -201,19 +241,19 @@ struct Array* Intersection(struct Array A, struct Array B)
     return C;
 }
 
-struct Array* Difference(struct Array A, struct Array B)
+Array* Array::Difference(Array B)
 {
     int i = 0;
     int j = 0;
     int k = 0;
 
-    struct Array *C = (struct Array *)malloc(sizeof(struct Array));
+    Array *C;
 
-    while( i < A.length && j < B.length)
+    while( i < length && j < B.length)
     {
-        if(A.A[i] < B.A[j])
-            C->A[k++] = A.A[i++];
-        else if(B.A[j] < A.A[i])
+        if( A[i] < B.A[j] )
+            C->A[k++] = A[i++];
+        else if(B.A[j] < A[i])
             j++;
         else{ 
             i++;
@@ -221,8 +261,8 @@ struct Array* Difference(struct Array A, struct Array B)
         }
     }
 
-    for( ; i < A.length ; i++)
-        C->A[k++] = A.A[i];
+    for( ; i < length ; i++)
+        C->A[k++] = A[i];
 
     C->length = k;
     C->size = 10;
@@ -230,52 +270,53 @@ struct Array* Difference(struct Array A, struct Array B)
     return C;
 }
 
-int Search(struct Array A, int key)
+int Array::Search(int key)
 {
     int l, m, h;
     l = 0;
-    h = A.length - 1;
+    h = length - 1;
     while(l <= h)
     {
         m = (l + h) / 2;
-        if(key == A.A[m])
+        if(key == A[m])
             return m;
-        if(key < A.A[m])
+        if(key < A[m])
             h = m - 1;
-        else if(key > A.A[m])
+        else if(key > A[m])
             l = m + 1;
     }
     return -1;
 }
          
         
-int Delete(struct Array *A, int index)
+int Array::Delete(int index)
 {
     int x = 0;
     int i;
 
-    if(index >= 0 && index < A->length)
+    if(index >= 0 && index < length)
     {
-        x = A->A[index];
-        for(i = index; i < A->length-1; i++)
-            A->A[i] = A->A[i+1];
-        A->length--;
+        x = A[index];
+        for(i = index; i < length-1; i++)
+        {
+            A[i] = A[i+1];
+        }
+        length--;
         return x;
     }
 
     return 0;
 }
 
+
 int main()
 {
-    struct Array A;
     int ch = 0;
-    int x, index;
+    int x, index, size;
 
-    printf("Enter size of Array A: ");
-    scanf("%d", &A.size);
-    A.A = (int *)malloc(A.size * sizeof(int));
-    A.length = A.size;
+    printf("Enter size of Array  ");
+    scanf("%d", &size);
+    Array A(size);
 
     printf("Menu\n");
     printf("1. Insert\n");
@@ -294,28 +335,28 @@ int main()
         {
             case 1: printf("Enter an element and index ");
                    scanf("%d%d", &x, &index);
-                   Set(&A, index, x); 
-                   Display(A);
+                   A.Set(index, x); 
+                   A.Display();
                    break;
             case 2: printf("Enter an index to delete ");
                    scanf("%d", &index);
-                   Delete(&A, index); 
-                   Display(A);
+                   A.Delete(index); 
+                   A.Display();
                    break;
             case 3: printf("Enter an element to search for");
                    scanf("%d", &x);
-                   index = Search(A, x);  
+                   index = A.Search(x);  
                    if(index != -1)
                        cout << "Element " << x << " was found at index: " << index << endl;
                    else
                        cout << "Element " << x << " was not found" << endl;
                    break;
-            case 4: printf("The sum of A: ");
-                   x = Sum(A); 
+            case 4: printf("The sum of  ");
+                   x = A.Sum(); 
                    cout << x << endl;
                    break;
             case 5: printf("Elements are: \n"); 
-                   Display(A);
+                   A.Display();
         } 
     }
                
