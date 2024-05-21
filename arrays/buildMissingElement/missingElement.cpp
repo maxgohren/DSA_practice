@@ -87,20 +87,64 @@ int main()
 	// counting duplicates
 	int f[] = {3,6,8,8,10,12,15,15,15,15};
 	n = 10;
+	int j = 0;
 	int lastDupf;
 
 	cout << "Counting duplicates in f[] = ";
 	printArray(f, n);
 	cout << endl;
-	for(int i = 0; i < n; i++)
+	for(int i = 0; i < n-1; i++)
 	{
-		if( f[i] == f[i+2] && f[i] != lastDupf)
+		if( f[i] == f[i+1] )
 		{
-			cout << f[i] << " ";
-			lastDupf = f[i];
+			j = i + 1;
+			while( f[i] == f[j] ) j++;
+			cout << f[i] << " appears " << (j - i) << " times" << endl;
+			i = j-1;
 		}
 	}
 	cout << endl << endl;
+
+	// counting duplicates with hashing
+	cout << "Counting duplicates with a hash table" << endl;
+	int g[] = {3,6,8,8,10,12,15,15,15,20};
+	int G[20] = {0};
+	
+	for(int i = 0; i < 10; i++)
+		G[g[i]]++;
+
+	for(int i = 0; i < 20; i++)
+		if(G[i] > 1) cout << "The duplicate " << i << " appears " << G[i] << " times" << endl;	
+
+	// finding duplicates in unsorted array
+	cout << "Finding duplicates in unsorted array" << endl;
+	int unsorted[] = {8,3,6,4,6,5,6,8,2,7};
+   	printArray(unsorted,10);
+	cout << endl;
+
+	int count = 0;
+	int x, y;
+
+	for(x = 0; x < 8; x++)
+	{
+		count = 1;
+		if(unsorted[x] != -1)
+		{
+			for(y = x+1; x < 9; y++)
+			{
+				if(unsorted[x] == unsorted[y])
+				{
+					count++;
+					unsorted[y] = -1;
+				}
+			}
+		}
+		if(count > 1) cout << unsorted[x] << " " << count << " " << endl;
+	}
+
+
+
+
 
     return 0;
 }
