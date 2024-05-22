@@ -116,21 +116,24 @@ int main()
 	for(int i = 0; i < 20; i++)
 		if(G[i] > 1) cout << "The duplicate " << i << " appears " << G[i] << " times" << endl;	
 
+	cout << endl;
+
 	// finding duplicates in unsorted array
 	cout << "Finding duplicates in unsorted array" << endl;
 	int unsorted[] = {8,3,6,4,6,5,6,8,2,7};
-   	printArray(unsorted,10);
+	n = 10;
+   	printArray(unsorted,n);
 	cout << endl;
 
 	int count = 0;
-	int x, y;
+	int x = 0, y = 0;
 
-	for(x = 0; x < 8; x++)
+	for(x = 0; x < n-1; x++)
 	{
 		count = 1;
 		if(unsorted[x] != -1)
 		{
-			for(y = x+1; x < 9; y++)
+			for(y = x+1; y < n-1; y++)
 			{
 				if(unsorted[x] == unsorted[y])
 				{
@@ -139,13 +142,8 @@ int main()
 				}
 			}
 		}
-		if(count > 1) cout << unsorted[x] << " " << count << " " << endl;
+		if(count > 1) cout << "The element: " << unsorted[x] << " appears " << count << " times" << endl;
 	}
-
-
-
-
-
     return 0;
 }
 
