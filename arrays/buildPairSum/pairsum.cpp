@@ -34,6 +34,31 @@ int main()
 	}
 	
 	printf("\n");
+
+
+	printf("Finding pair with sum k in sorted array B[] = {1,3,4,5,6,8,9,10,12,14}\n");
+	int B[] = {1,3,4,5,6,8,9,10,12,14};
+	i = 0;
+	j = 9;
+	while(i < j)
+	{
+		if( (B[i] + B[j]) == k)
+		{
+			printf("The pair %d and %d sum to %d\n", B[i], B[j], k);
+			i++;
+			j--;
+		}
+		if( (B[i] + B[j]) < k)
+			i++;
+		else
+			j--;
+	}
+
+
+
+
+
+
 	return 0;
 }
 			
