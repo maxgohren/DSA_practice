@@ -54,11 +54,6 @@ int main()
 			j--;
 	}
 
-
-
-
-
-
 	return 0;
 }
 			
