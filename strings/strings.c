@@ -5,7 +5,6 @@ int isValid(char *s)
 	int i = 0;
 	while(s[i] != '\0')
 	{
-		printf("s[%d] = %c\n", i, s[i]);
 		if(s[i] <  97 || s[i] > 122) return 0;
 		else if(s[i] <  65 && s[i] >  90) return 0;
 		else i++;
@@ -52,5 +51,32 @@ int main(){
 	if(isValid(valid)) printf("The string %s is valid\n", valid);
 	if(!isValid(invalid)) printf("The string %s is invalid\n", invalid);
 
+	// reverse string
+	char forward[] = "Python";
+	char reverse[7] = {0};
+
+	for(i = 0; forward[i] != '\0'; i++)
+	{
+		reverse[5 - i] = forward[i];
+	}
+	reverse[6] = '\0';
+	printf("The word %s reversed is %s\n", forward, reverse);
+
+
+	// reverse string in place
+	char A[] = "Python";
+	char Acpy[] = "Python";
+	int j = 5; // position before \0 in "Python"
+	char t;
+
+	for(i = 0; i < j; i++,j--)
+	{
+		t = A[i];
+		A[i] = A[j];
+		A[j] = t;
+	}
+	printf("The reverse in place: %s becomes %s\n", Acpy, A);
+
 	return 0;
 }
+
