@@ -77,6 +77,28 @@ int main(){
 	}
 	printf("The reverse in place: %s becomes %s\n", Acpy, A);
 
+	// check for palindrome with 2 pointer approach
+	char palin[] = "madam";
+	printf("Is the string %s a palidrome?\n", palin);
+	for(i = 0, j = 4; i < j; i++, j--)
+		if(palin[i] != palin[j]) printf("%s is not a palindrome\n", palin);
+	printf("%s is a palindrome\n", palin);
+
+	// check for palindrome with reverse copy and compare
+	char palin2[] = "racecar";
+	char palin2cpy[8];
+
+	for(i = 0; palin2[i] != '\0'; i++)
+		palin2cpy[6-i] = palin2[i];
+	palin2cpy[7] = '\0';
+
+	for(i = 0; palin2[i] != '\0'; i++)
+	{
+		if(palin2[i] != palin2cpy[i]) printf("%s is not a palindrome\n", palin2);
+	}
+	printf("%s is a palindrome\n", palin2);
+	
+
 	return 0;
 }
 
