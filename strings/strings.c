@@ -97,7 +97,19 @@ int main(){
 		if(palin2[i] != palin2cpy[i]) printf("%s is not a palindrome\n", palin2);
 	}
 	printf("%s is a palindrome\n", palin2);
+
+	// find duplicates in a string with hash table
+	char duplicates[] = "finding";
+	int H[26] = {0};
 	
+	for(i = 0; duplicates[i] != '\0'; i++)
+		H[duplicates[i] - 97] += 1;
+
+	printf("The following characters appeared more than once in the string %s\n", duplicates);
+	for(i = 0; i < 26; i++)
+		if( H[i] > 1) printf("%c ", H[i]+97);
+
+	printf("\n");	
 
 	return 0;
 }
