@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 int isValid(char *s)
 {
@@ -102,14 +103,46 @@ int main(){
 	char duplicates[] = "finding";
 	int H[26] = {0};
 	
-	for(i = 0; duplicates[i] != '\0'; i++)
-		H[duplicates[i] - 97] += 1;
+	for(i = 0; i < 7; i++)
+		H[ duplicates[i] - 97 ] += 1;
 
 	printf("The following characters appeared more than once in the string %s\n", duplicates);
 	for(i = 0; i < 26; i++)
-		if( H[i] > 1) printf("%c ", H[i]+97);
+		if( H[i] > 1) printf("%c ", i+97);
 
 	printf("\n");	
+	
+	// find duplicates with bitwise hash table
+	char dup[] = "finding";
+	int B = 0, x = 0;
+
+	for(i = 0; i < 7; i++)
+	{
+		x = 1;
+		x = x << ( dup[i] - 97);  // shift bit left by position in alphabet
+		if( (x & B) )
+			printf("The letter %c is a duplicate in %s\n", dup[i], dup);
+		else
+			B = x | B;
+	}
+
+	// check if two strings are anagrams: when words are different but the same set of letters are used
+
+	char ana1[] = "decimal";
+	char ana2[] = "medical";
+	memset(H, 0, sizeof(H));
+
+	for(i = 0; i < 8; i++)
+	{
+		H[ ana1[i] - 97 ]++;	
+	}
+	for(i = 0; i < 8; i++)
+	{
+		H[ ana2[i] - 97 ]--;	
+		if( H[ ana2[i] - 97 ] < 0) 
+		printf("The strings %s and %s are not anagrams\n", ana1, ana2);
+	}
+	if( ana2[i-1] == '\0') printf("The strings \"%s\" and \"%s\" are anagrams\n", ana1, ana2);
 
 	return 0;
 }
