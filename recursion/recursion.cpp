@@ -226,7 +226,7 @@ int main()
     int n = 4, r = 2;
     //printf("# of cmbns of size %d for set of %d: %d\n", r, n, nCr(n,r));
     
-    TOH(20, 1,2,3);
+    TOH(3, 1,2,3);
     
      return 0;
 }
