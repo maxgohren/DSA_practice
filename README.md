@@ -1,5 +1,8 @@
-Practising Data Structures and Algorithms Concepts
+## Practising Data Structures and Algorithms Concepts
 
--Recursion
+#### Currently Studying
+*Strings
 
--Arrays as Abstract Data Types
+#### Topics Previously Covered
+*Recursion
+*Arrays as Abstract Data Types
