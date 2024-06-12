@@ -4,23 +4,29 @@
 
 void perm(char *s, int k)
 {
+	// marker array A says A[i] = 0 means char s[i] is available to take to result string
+	// 				  else A[i] = 1 means char s[i] is unavailable (already been used)
 	static int A[10] = {0};
+	// result string
 	static char Res[10];
 	int i;
-	
+
+	// recursive break condition on end of given string ABC	
 	if(s[k] == '\0') {
 		Res[k] = '\0';
 		printf("Result: %s\n", Res);
 	}
 	else {
+		// loop through given string ABC until end
 		for(i = 0; s[i] != '\0'; i++)
 		{
+			// if marker string has an available letter (A[i] == 0)
 			if(A[i] == 0)
 			{
-				Res[k] = s[i];
-				A[i] = 1;
-				perm(s, k+1);
-				A[i] = 0;
+				Res[k] = s[i]; // use the ith letter of given string into result string
+				A[i] = 1; 	   // set letter as unavailable
+				perm(s, k+1);  // recursively call to loop through the rest of the string beginning at the next letter (k+1)
+				A[i] = 0;      // set letter as available again when we backtrack for next call
 			}
 		}
 	}
