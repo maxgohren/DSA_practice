@@ -22,9 +22,7 @@ void create(int A[], int n)
 		tmp->next = NULL;
 		
 		last->next = tmp;
-
 		last = last->next;
-
 	}
 }
 
@@ -38,12 +36,23 @@ void display(struct Node *ll)
 	printf("\n");
 }
 
+void displayRecursive(struct Node *ll)
+{
+	if(ll != NULL)
+	{
+		printf("%d ", ll->data);
+		displayRecursive(ll->next);
+	}
+	
+}
+
 int main(){
 
 	int A[] = {3,5,7,10,15};
 
 	create(A, 5);
 	display(first);
+	displayRecursive(first); printf("\n");
 
 	return 0;
 }
