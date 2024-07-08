@@ -46,6 +46,29 @@ void displayRecursive(struct Node *ll)
 	
 }
 
+int sum(struct Node *p)
+{
+	int c = 0;
+	while( p != NULL )
+	{
+		c += p->data;
+		p = p->next;
+	}
+	return c;
+}
+
+int count(struct Node *p)
+{
+	int c = 0;
+	while( p != NULL )
+	{
+		c += 1;
+		p = p->next;
+	}
+	return c;
+}
+
+
 int main(){
 
 	int A[] = {3,5,7,10,15};
@@ -53,6 +76,8 @@ int main(){
 	create(A, 5);
 	display(first);
 	displayRecursive(first); printf("\n");
+	printf("The sum of all the nodes is %d\n", sum(first));
+	printf("The amout of nodes is %d\n", count(first));
 
 	return 0;
 }
