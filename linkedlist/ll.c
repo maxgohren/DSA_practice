@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 struct Node {
 	int data;
@@ -68,7 +69,33 @@ int count(struct Node *p)
 	return c;
 }
 
+int max(struct Node *p)
+{
+	int max = INT_MIN;
+	while(p != NULL)
+	{
+		if(p->data > max)
+		{
+			max = p->data;
+		}
+	p = p->next;
+	}
+	return max;
+}
 
+int min(struct Node *p)
+{
+	int min = INT_MAX;
+	while(p != NULL)
+	{
+		if(p->data < min)
+		{
+			min = p->data;
+		}
+	p = p->next;
+	}
+	return min;
+}
 int main(){
 
 	int A[] = {3,5,7,10,15};
@@ -77,7 +104,10 @@ int main(){
 	display(first);
 	displayRecursive(first); printf("\n");
 	printf("The sum of all the nodes is %d\n", sum(first));
-	printf("The amout of nodes is %d\n", count(first));
+	printf("The amount of nodes is %d\n", count(first));
+	printf("The max of the list is %d\n", max(first));
+	printf("The min of the list is %d\n", min(first));
+
 
 	return 0;
 }
