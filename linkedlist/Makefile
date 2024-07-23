@@ -1,5 +1,19 @@
-.SILENT:
+CC = gcc
+CFLAGS = -Wall -g
 
-make:
-	gcc -o LL ll.c
-	./LL
+TARGET = LL
+SRCS = ll.c
+
+run:
+	@clear
+	@ctags *
+	@$(CC) $(CFLAGS) -o $(TARGET) $(SRCS)
+	@./$(TARGET) $(filter-out $@,$(MAKECMDGOALS))
+
+%:
+	@:
+
+.PHONY: all clean run
+
+
+
