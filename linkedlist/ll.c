@@ -9,7 +9,7 @@ struct Node {
 
 void create(int A[], int n)
 {
-	printf("Creating new list with size %d and values: %d ", n, A[0]);
+	printf("Creating new list with size %d and values: \n%d ", n, A[0]);
 	int i;
 	struct Node *tmp, *last;
 	first = (struct Node *)malloc(sizeof(struct Node));
@@ -194,32 +194,92 @@ void insertSort(struct Node* p, int n)
 
 void delete(struct Node* p, int index)
 {
-	struct Node* tmp = p;
-	int count = 0;
+	printf("Deleting node %d from list\n", index);
+	int c = 1;
 	
 	if(index == 0)
 	{
 		first = first->next;
-		free(tmp);
+		free(p);
+		display(first);
 		return;
 	}
 	else
 	{
+		int cl = count(first);
+		if(index > cl)
+		{
+			printf("Index is greater than list, could not delete\n");
+			return;
+		}
+		struct Node* q = p;
 		while(p)
 		{
-			if(count == index)
+			if(c == index)
 			{
-				tmp = p->next;
-				first->next = first->next->next;
+				q->next = p->next;
 				free(p);
+				display(first);
 				return;
 			}
+			c++;
+			q = p;
 			p = p->next;
-			count++;
 		}
 	}
 }
 
+void removeDuplicates(struct Node* p)
+{
+	printf("Removing duplicates from list\n");
+	struct Node* q = p->next;
+
+	while(q)
+	{
+		if(q->data != p->data)
+		{
+			q = q->next;
+			p = p->next;
+		}
+		else
+		{
+			p->next = q->next;
+			free(q);
+			q = p->next;
+		}
+	}
+	display(first);
+}
+
+struct Node* reverseList(struct Node* p)
+{
+	printf("Reversing list\n");
+	struct Node* retList = NULL;
+	// iterate through list for each node
+	int c = count(first);
+	// when we reach the end of the list
+	for(int i = 0; i < c; i++){
+
+		while(p->next != NULL)
+		{
+			p = p->next;
+		}
+		
+		retList = p;
+		retList->next = 
+
+
+	}
+
+	// assign node to new list
+
+
+	// return pointer to start of new list 
+
+	// assign first to new list
+
+	display(first);
+}
 
 int main(int argc, char **argv){
 
@@ -238,7 +298,7 @@ int main(int argc, char **argv){
 	{
 		default:
 		case 1:
-			printf("Running Case 1\n");
+			printf("Running Case 1: insertion and misc. items\n");
 			int A[] = {3,5,7};
 			create(A, 3);
 			display(first);
@@ -256,7 +316,7 @@ int main(int argc, char **argv){
 			insertIndex(first, 4, 14);
 			break;
 		case 2:
-			printf("Running Case 2\n");
+			printf("Running Case 2: insertion\n");
 			// Sorted list
 			int B[] = {10,20,30};
 			create(B, 3);
@@ -265,13 +325,19 @@ int main(int argc, char **argv){
 			insertSort(first, 3);
 			break;
 		case 3:
-			printf("Running Case 3\n");
-			int C[] = {1, 2, 3, 4 ,5};
+			printf("Running Case 3: deletion\n");
+			int C[] = {0, 1, 2, 3, 4 };
 			create(C, 5);
 			delete(first, 0);
 			delete(first, 3);
+			delete(first, 4);
 			break;
-
+		case 4:
+			printf("Running Case 3: removing duplicates\n");
+			int D[] = { 1 , 2, 3 , 4, 4, 5, 6, 7, 8, 8 };
+			create(D, 10);
+			removeDuplicates(first);
+			break;
 	}
 
 
