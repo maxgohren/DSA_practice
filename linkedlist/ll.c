@@ -251,33 +251,23 @@ void removeDuplicates(struct Node* p)
 	display(first);
 }
 
-struct Node* reverseList(struct Node* p)
+void reverseList(struct Node* p)
 {
 	printf("Reversing list\n");
-	struct Node* retList = NULL;
-	// iterate through list for each node
-	int c = count(first);
-	// when we reach the end of the list
-	for(int i = 0; i < c; i++){
+	struct Node* q, *r;
+	q = r = NULL;
 
-		while(p->next != NULL)
-		{
-			p = p->next;
-		}
-		
-		retList = p;
-		retList->next = 
+	while(p)
+	{
+		// slide pointers down list
+		r = q;
+		q = p;
+		p = p->next;
 
-
+		// reverse the links
+		q->next = r;
 	}
-
-	// assign node to new list
-
-
-	// return pointer to start of new list 
-
-	// assign first to new list
-
+	first = q;
 	display(first);
 }
 
@@ -333,10 +323,16 @@ int main(int argc, char **argv){
 			delete(first, 4);
 			break;
 		case 4:
-			printf("Running Case 3: removing duplicates\n");
+			printf("Running Case 4: removing duplicates\n");
 			int D[] = { 1 , 2, 3 , 4, 4, 5, 6, 7, 8, 8 };
 			create(D, 10);
 			removeDuplicates(first);
+			break;
+		case 5:
+			printf("Running Case 5: reversal of list\n");
+			int E[] = { 10, 20, 30, 40, 50, 60 };
+			create(E, 6);
+			reverseList(first);
 			break;
 	}
 
