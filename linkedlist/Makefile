@@ -8,7 +8,7 @@ run:
 	@clear
 	@ctags *
 	@$(CC) $(CFLAGS) -o $(TARGET) $(SRCS)
-	@./$(TARGET) $(filter-out $@,$(MAKECMDGOALS))
+	./$(TARGET) $(filter-out $@,$(MAKECMDGOALS))
 
 %:
 	@:

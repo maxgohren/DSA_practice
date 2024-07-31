@@ -271,6 +271,20 @@ void reverseList(struct Node* p)
 	display(first);
 }
 
+void reverseRecursive(struct Node* p, struct Node* q)
+{
+	printf("Reversing list recursively\n");
+	if(p)
+	{
+		reverseRecursive(p, p->next);
+		p->next = q;
+	} else {
+		first = q;
+	}
+	display(first);
+}
+
+
 int main(int argc, char **argv){
 
 	//printf("argc: %d\n", argc);
@@ -280,7 +294,7 @@ int main(int argc, char **argv){
 
 	if(argc < 2)
 	{ 
-		printf("Usage: make <case #>\n");
+		printf("Usage: make run <case #>\n");
 		exit(0);
 	}
 
@@ -333,6 +347,7 @@ int main(int argc, char **argv){
 			int E[] = { 10, 20, 30, 40, 50, 60 };
 			create(E, 6);
 			reverseList(first);
+			reverseRecursive(NULL, first);
 			break;
 	}
 
