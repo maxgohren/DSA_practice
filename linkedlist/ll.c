@@ -285,6 +285,7 @@ void reverseRecursive(struct Node* p, struct Node* q)
 }
 
 
+
 int main(int argc, char **argv){
 
 	//printf("argc: %d\n", argc);
@@ -349,6 +350,16 @@ int main(int argc, char **argv){
 			reverseList(first);
 			reverseRecursive(NULL, first);
 			break;
+		case 6:
+			printf("Concatenation and merging of lists\n");
+			int F[] = { 1, 2, 3, 4, 5, 6};
+			int G[] = { 0, 2, 4, 6, 8, 10};
+			create(F, 6);
+			create(G, 6);
+			concatenate(F, G);
+			merge(F, G);
+			break;
+
 	}
 
 
