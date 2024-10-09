@@ -5,10 +5,16 @@ TARGET = LL
 SRCS = ll.c
 
 run:
-#@clear
+	@clear
 	@ctags *
 	@$(CC) $(CFLAGS) -o $(TARGET) $(SRCS)
 	./$(TARGET) $(filter-out $@,$(MAKECMDGOALS))
+
+class:
+	@clear
+	@ctags *
+	g++ -o classll ll.cpp
+	./classll
 
 
 %:

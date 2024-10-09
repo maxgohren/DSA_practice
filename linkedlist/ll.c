@@ -310,13 +310,14 @@ void reverseRecursive(struct Node* p, struct Node* q)
 void concatenate(struct Node *f, struct Node *s)
 {
 	printf("Concatenating the following lists:\n");
-	struct Node *t, *last;
-	t = last = f;
-	display(f);
-	display(s);
-	display(t);
-	display(last);
-
+	struct Node *r, *l; // return and l
+	r = l = f;
+	// move all the way to end of f
+	while(l->next != NULL) l = l->next;
+	// make f->next = s;
+	l->next = s;
+	// return r;
+	display(r);
 }
 
 void merge(struct Node* f, struct Node* s)
@@ -360,6 +361,25 @@ void merge(struct Node* f, struct Node* s)
 	display(r);
 }
 			
+
+int isLoop(struct Node *f)
+{
+	struct Node *p, *q;
+
+	p = q = f;
+
+	do
+	{
+		p = p->next;
+		q = q->next;
+		q = q ? q->next : q;
+	} while (p && q && p != q);
+
+	if ( p == q)
+		return 1;
+	else 
+		return 0;
+}
 
 
 int main(int argc, char **argv){
@@ -427,15 +447,30 @@ int main(int argc, char **argv){
 			reverseRecursive(NULL, first);
 			break;
 		case 6:
-			printf("Concatenation and merging of lists\n");
+			printf("Concatenation of lists\n");
 			int F[] = { 2, 8, 10, 15};
 			int G[] = { 4, 7, 12, 14};
 			createFirst(F, 4);
 			createSecond(G, 4);
 			concatenate(first, second);
+			break;
+		case 7:
+			printf("Concatenation of lists\n");
+			int H[] = { 2, 8, 10, 15};
+			int I[] = { 4, 7, 12, 14};
+			createFirst(H, 4);
+			createSecond(I, 4);
 			merge(first, second);
 			break;
-
+		case 8:
+			printf("Checking for loop in list\n");
+			int J[] = { 2 , 4 , 6 , 8 , 10};
+			createFirst(J, 5);
+			struct Node *t1, *t2;
+			t1 = first->next->next;
+			t2 = first->next->next->next->next;
+			t2->next = t1;
+			printf("The result of isLoop() is %d\n", isLoop(first));
 	}
 
 
