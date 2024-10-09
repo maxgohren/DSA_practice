@@ -5,11 +5,11 @@
 struct Node {
 	int data;
 	struct Node *next;
-}*first=NULL;
+}*first=NULL,*second=NULL;
 
-void create(int A[], int n)
+void createFirst(int A[], int n)
 {
-	printf("Creating new list with size %d and values: \n%d ", n, A[0]);
+	printf("Creating first list with size %d and values: \n%d ", n, A[0]);
 	int i;
 	struct Node *tmp, *last;
 	first = (struct Node *)malloc(sizeof(struct Node));
@@ -30,6 +30,28 @@ void create(int A[], int n)
 	printf("\n");
 }
 
+void createSecond(int A[], int n)
+{
+	printf("Creating second list with size %d and values: \n%d ", n, A[0]);
+	int i;
+	struct Node *tmp, *last;
+	second = (struct Node *)malloc(sizeof(struct Node));
+	second->data = A[0];
+	second->next = NULL;
+	last = second; 
+
+	for(i = 1; i < n; i++)
+	{
+		printf("%d ", A[i]);
+		tmp = (struct Node *)malloc(sizeof(struct Node));
+		tmp->data = A[i];
+		tmp->next = NULL;
+		
+		last->next = tmp;
+		last = last->next;
+	}
+	printf("\n");
+}
 
 void display(struct Node *ll)
 {
@@ -131,7 +153,7 @@ struct Node *search(struct Node *p, int key)
 void insertFront(struct Node *p, int n)
 {
 	printf("Inserting new node in front with data %d\n", n);
-	// create new node on HEAP
+	// createFirst new node on HEAP
 	struct Node *tmp = (struct Node *)malloc(sizeof(struct Node));
 	
 	tmp->data = n;
@@ -285,6 +307,60 @@ void reverseRecursive(struct Node* p, struct Node* q)
 }
 
 
+void concatenate(struct Node *f, struct Node *s)
+{
+	printf("Concatenating the following lists:\n");
+	struct Node *t, *last;
+	t = last = f;
+	display(f);
+	display(s);
+	display(t);
+	display(last);
+
+}
+
+void merge(struct Node* f, struct Node* s)
+{
+	printf("Merging the following lists:\n");
+	display(f); 
+	display(s);
+
+	// just pointers to EXISTING nodes that have already been malloc'd, do not need to malloc these
+	struct Node *r, *l; // r = return node, l = last node;
+
+	if (f->data < s->data) {
+		r = l = f; 		   // move l and r to smallest node
+		f = f->next; 	   // move first to next
+		l->next = NULL;    // clear link to prepare for next smaller node
+	} else {
+		r = l = s;
+		s = s->next; 	   // move second to next
+		l->next = NULL;    // clear link to prepare for next smaller node
+	}
+	// loop through list and merge smaller list
+	while( f != NULL && s != NULL) {
+		if( f->data < s->data){
+			l->next = f;   // link last node to smaller node
+			l = f;		   // move l to "last" node`
+			f = f->next;   // move first node to next node in list
+			l->next = NULL;// clear link to prepare for merge
+		} else {
+			l->next = s;   // link last node to smaller node
+			l = s;		   // move l to "last" node`
+			s = s->next;   // move first node to next node in list
+			l->next = NULL;// clear link to prepare sor merge
+		}
+	}
+	// add rest of list from the non-null node
+	// if s is null, then make next point to first list else the opposite.
+	if(!s)
+		l->next = f;
+	else
+		l->next = s;
+	display(r);
+}
+			
+
 
 int main(int argc, char **argv){
 
@@ -305,7 +381,7 @@ int main(int argc, char **argv){
 		case 1:
 			printf("Running Case 1: insertion and misc. items\n");
 			int A[] = {3,5,7};
-			create(A, 3);
+			createFirst(A, 3);
 			display(first);
 			displayRecursive(first); printf("\n");
 			count(first);
@@ -324,7 +400,7 @@ int main(int argc, char **argv){
 			printf("Running Case 2: insertion\n");
 			// Sorted list
 			int B[] = {10,20,30};
-			create(B, 3);
+			createFirst(B, 3);
 			insertSort(first, 34);
 			insertSort(first, 16);
 			insertSort(first, 3);
@@ -332,7 +408,7 @@ int main(int argc, char **argv){
 		case 3:
 			printf("Running Case 3: deletion\n");
 			int C[] = {0, 1, 2, 3, 4 };
-			create(C, 5);
+			createFirst(C, 5);
 			delete(first, 0);
 			delete(first, 3);
 			delete(first, 4);
@@ -340,24 +416,24 @@ int main(int argc, char **argv){
 		case 4:
 			printf("Running Case 4: removing duplicates\n");
 			int D[] = { 1 , 2, 3 , 4, 4, 5, 6, 7, 8, 8 };
-			create(D, 10);
+			createFirst(D, 10);
 			removeDuplicates(first);
 			break;
 		case 5:
 			printf("Running Case 5: reversal of list\n");
 			int E[] = { 10, 20, 30, 40, 50, 60 };
-			create(E, 6);
+			createFirst(E, 6);
 			reverseList(first);
 			reverseRecursive(NULL, first);
 			break;
 		case 6:
 			printf("Concatenation and merging of lists\n");
-			int F[] = { 1, 2, 3, 4, 5, 6};
-			int G[] = { 0, 2, 4, 6, 8, 10};
-			create(F, 6);
-			create(G, 6);
-			concatenate(F, G);
-			merge(F, G);
+			int F[] = { 2, 8, 10, 15};
+			int G[] = { 4, 7, 12, 14};
+			createFirst(F, 4);
+			createSecond(G, 4);
+			concatenate(first, second);
+			merge(first, second);
 			break;
 
 	}

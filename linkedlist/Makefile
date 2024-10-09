@@ -5,10 +5,11 @@ TARGET = LL
 SRCS = ll.c
 
 run:
-	@clear
+#@clear
 	@ctags *
 	@$(CC) $(CFLAGS) -o $(TARGET) $(SRCS)
 	./$(TARGET) $(filter-out $@,$(MAKECMDGOALS))
+
 
 %:
 	@:
