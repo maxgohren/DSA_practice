@@ -7,20 +7,25 @@
 CC	Makefile	/^CC = gcc$/;"	m
 CFLAGS	Makefile	/^CFLAGS = -Wall -g$/;"	m
 Delete	ll.cpp	/^int LinkedList::Delete(int index)$/;"	f	class:LinkedList
+Display	circlist.c	/^void Display(struct Node *h)$/;"	f
 Display	ll.cpp	/^void LinkedList::Display()$/;"	f	class:LinkedList
+Head	circlist.c	/^}*Head;$/;"	v	typeref:struct:Node
 Insert	ll.cpp	/^void LinkedList::Insert(int index, int x)$/;"	f	class:LinkedList
 Length	ll.cpp	/^int LinkedList::Length()$/;"	f	class:LinkedList
 LinkedList	ll.cpp	/^		LinkedList(){first=NULL;}$/;"	f	class:LinkedList
 LinkedList	ll.cpp	/^LinkedList::LinkedList(int A[], int n)$/;"	f	class:LinkedList
 LinkedList	ll.cpp	/^class LinkedList$/;"	c	file:
+Node	circlist.c	/^struct Node{$/;"	s	file:
 Node	ll.c	/^struct Node {$/;"	s	file:
 Node	ll.cpp	/^class Node$/;"	c	file:
 SRCS	Makefile	/^SRCS = ll.c$/;"	m
 TARGET	Makefile	/^TARGET = LL$/;"	m
 concatenate	ll.c	/^void concatenate(struct Node *f, struct Node *s)$/;"	f
 count	ll.c	/^int count(struct Node *p)$/;"	f
+create	circlist.c	/^void create(int A[], int n)$/;"	f
 createFirst	ll.c	/^void createFirst(int A[], int n)$/;"	f
 createSecond	ll.c	/^void createSecond(int A[], int n)$/;"	f
+data	circlist.c	/^	int data;$/;"	m	struct:Node	file:
 data	ll.c	/^	int data;$/;"	m	struct:Node	file:
 data	ll.cpp	/^		int data;$/;"	m	class:Node	file:
 delete	ll.c	/^void delete(struct Node* p, int index)$/;"	f
@@ -32,11 +37,13 @@ insertFront	ll.c	/^void insertFront(struct Node *p, int n)$/;"	f
 insertIndex	ll.c	/^void insertIndex(struct Node* p, int index, int n)$/;"	f
 insertSort	ll.c	/^void insertSort(struct Node* p, int n)$/;"	f
 isLoop	ll.c	/^int isLoop(struct Node *f)$/;"	f
+main	circlist.c	/^int main()$/;"	f
 main	ll.c	/^int main(int argc, char **argv){$/;"	f
 main	ll.cpp	/^int main()$/;"	f
 max	ll.c	/^int max(struct Node *p)$/;"	f
 merge	ll.c	/^void merge(struct Node* f, struct Node* s)$/;"	f
 min	ll.c	/^int min(struct Node *p)$/;"	f
+next	circlist.c	/^	struct Node *next;$/;"	m	struct:Node	typeref:struct:Node::Node	file:
 next	ll.c	/^	struct Node *next;$/;"	m	struct:Node	typeref:struct:Node::Node	file:
 next	ll.cpp	/^		Node *next;$/;"	m	class:Node	file:
 removeDuplicates	ll.c	/^void removeDuplicates(struct Node* p)$/;"	f

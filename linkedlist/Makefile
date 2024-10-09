@@ -16,6 +16,12 @@ class:
 	g++ -o classll ll.cpp
 	./classll
 
+circ:
+	@clear
+	@ctags *
+	gcc -o Circ circlist.c
+	./Circ
+
 
 %:
 	@:
