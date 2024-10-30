@@ -1,3 +1,5 @@
+.SILENT:
+
 CC = gcc
 CFLAGS = -Wall -g
 
@@ -22,11 +24,13 @@ circ:
 	gcc -o Circ circlist.c
 	./Circ
 
+dub:
+	@ctags *
+	gcc -o Dub dublist.c
+	./Dub
+
 
 %:
 	@:
 
 .PHONY: all clean run
-
-
-

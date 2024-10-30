@@ -4,28 +4,41 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Append	circlist.c	/^void Append(int n)$/;"	f
+Append	dublist.c	/^void Append(int n)$/;"	f
 CC	Makefile	/^CC = gcc$/;"	m
 CFLAGS	Makefile	/^CFLAGS = -Wall -g$/;"	m
+Delete	circlist.c	/^void Delete(int pos){$/;"	f
+Delete	dublist.c	/^void Delete(int pos){$/;"	f
 Delete	ll.cpp	/^int LinkedList::Delete(int index)$/;"	f	class:LinkedList
 Display	circlist.c	/^void Display(struct Node *h)$/;"	f
+Display	dublist.c	/^void Display()$/;"	f
 Display	ll.cpp	/^void LinkedList::Display()$/;"	f	class:LinkedList
+DisplayNode	circlist.c	/^void DisplayNode(struct Node *p)$/;"	f
 Head	circlist.c	/^}*Head;$/;"	v	typeref:struct:Node
+Head	dublist.c	/^}*Head;$/;"	v	typeref:struct:Node
+Insert	circlist.c	/^void Insert(int pos, int n)$/;"	f
 Insert	ll.cpp	/^void LinkedList::Insert(int index, int x)$/;"	f	class:LinkedList
+Length	circlist.c	/^int Length(){$/;"	f
+Length	dublist.c	/^int Length(){$/;"	f
 Length	ll.cpp	/^int LinkedList::Length()$/;"	f	class:LinkedList
 LinkedList	ll.cpp	/^		LinkedList(){first=NULL;}$/;"	f	class:LinkedList
 LinkedList	ll.cpp	/^LinkedList::LinkedList(int A[], int n)$/;"	f	class:LinkedList
 LinkedList	ll.cpp	/^class LinkedList$/;"	c	file:
 Node	circlist.c	/^struct Node{$/;"	s	file:
+Node	dublist.c	/^struct Node {$/;"	s	file:
 Node	ll.c	/^struct Node {$/;"	s	file:
 Node	ll.cpp	/^class Node$/;"	c	file:
 SRCS	Makefile	/^SRCS = ll.c$/;"	m
 TARGET	Makefile	/^TARGET = LL$/;"	m
 concatenate	ll.c	/^void concatenate(struct Node *f, struct Node *s)$/;"	f
 count	ll.c	/^int count(struct Node *p)$/;"	f
-create	circlist.c	/^void create(int A[], int n)$/;"	f
+createCirc	circlist.c	/^void createCirc(int A[], int n)$/;"	f
 createFirst	ll.c	/^void createFirst(int A[], int n)$/;"	f
+createList	dublist.c	/^void createList(int A[], int size)$/;"	f
 createSecond	ll.c	/^void createSecond(int A[], int n)$/;"	f
 data	circlist.c	/^	int data;$/;"	m	struct:Node	file:
+data	dublist.c	/^	int data;$/;"	m	struct:Node	file:
 data	ll.c	/^	int data;$/;"	m	struct:Node	file:
 data	ll.cpp	/^		int data;$/;"	m	class:Node	file:
 delete	ll.c	/^void delete(struct Node* p, int index)$/;"	f
@@ -38,14 +51,17 @@ insertIndex	ll.c	/^void insertIndex(struct Node* p, int index, int n)$/;"	f
 insertSort	ll.c	/^void insertSort(struct Node* p, int n)$/;"	f
 isLoop	ll.c	/^int isLoop(struct Node *f)$/;"	f
 main	circlist.c	/^int main()$/;"	f
+main	dublist.c	/^int main(){$/;"	f
 main	ll.c	/^int main(int argc, char **argv){$/;"	f
 main	ll.cpp	/^int main()$/;"	f
 max	ll.c	/^int max(struct Node *p)$/;"	f
 merge	ll.c	/^void merge(struct Node* f, struct Node* s)$/;"	f
 min	ll.c	/^int min(struct Node *p)$/;"	f
 next	circlist.c	/^	struct Node *next;$/;"	m	struct:Node	typeref:struct:Node::Node	file:
+next	dublist.c	/^	struct Node *next;$/;"	m	struct:Node	typeref:struct:Node::Node	file:
 next	ll.c	/^	struct Node *next;$/;"	m	struct:Node	typeref:struct:Node::Node	file:
 next	ll.cpp	/^		Node *next;$/;"	m	class:Node	file:
+prev	dublist.c	/^	struct Node *prev;$/;"	m	struct:Node	typeref:struct:Node::Node	file:
 removeDuplicates	ll.c	/^void removeDuplicates(struct Node* p)$/;"	f
 reverseList	ll.c	/^void reverseList(struct Node* p)$/;"	f
 reverseRecursive	ll.c	/^void reverseRecursive(struct Node* p, struct Node* q)$/;"	f
