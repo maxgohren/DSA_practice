@@ -30,6 +30,7 @@ Node	circlist.c	/^struct Node{$/;"	s	file:
 Node	dublist.c	/^struct Node {$/;"	s	file:
 Node	ll.c	/^struct Node {$/;"	s	file:
 Node	ll.cpp	/^class Node$/;"	c	file:
+Reverse	dublist.c	/^void Reverse()$/;"	f
 SRCS	Makefile	/^SRCS = ll.c$/;"	m
 TARGET	Makefile	/^TARGET = LL$/;"	m
 concatenate	ll.c	/^void concatenate(struct Node *f, struct Node *s)$/;"	f

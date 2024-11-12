@@ -123,14 +123,19 @@ void Delete(int pos){
 	struct Node *t = Head;
 	struct Node *last = Head;
 
+	// Special case of deleting Head
 	if(pos == 0){
+		/*
 		while (t->next != Head){
 			last = t;
 			t = t->next;
 		}
+		*/
+		t = Head->prev;
 		Head = Head->next;
 		free(t->next);
 		t->next = Head;
+	// Every other position
 	} else {
 		int i = 0;
 		do{
