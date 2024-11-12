@@ -18,6 +18,7 @@ DisplayNode	circlist.c	/^void DisplayNode(struct Node *p)$/;"	f
 Head	circlist.c	/^}*Head;$/;"	v	typeref:struct:Node
 Head	dublist.c	/^}*Head;$/;"	v	typeref:struct:Node
 Insert	circlist.c	/^void Insert(int pos, int n)$/;"	f
+Insert	dublist.c	/^void Insert(int pos, int value)$/;"	f
 Insert	ll.cpp	/^void LinkedList::Insert(int index, int x)$/;"	f	class:LinkedList
 Length	circlist.c	/^int Length(){$/;"	f
 Length	dublist.c	/^int Length(){$/;"	f
