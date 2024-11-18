@@ -1,0 +1,22 @@
+Comparison of Linked Lists:
+
+Procedure || Linear Singly Linked List | Circular Singly LL | Linear Doubly LL | Circular Doubly LL
+----------++---------------------------+--------------------+------------------+--------------------
+Traversal || Unidirectional            | Unidirectional	    | Bidirectional    | Bidirectional and
+	      ||                           | and circular       |                  | circular 
+----------++---------------------------+--------------------+------------------+--------------------
+Insert    || O(n)                      | O(n)               | O(n)             | O(n)                    Note: becasue of O(n), only first (and last for circular) pos is O(n);
+----------++---------------------------+--------------------+------------------+--------------------
+Deletion  || Same as Insertion         | >                  | >                | > 
+----------++---------------------------+--------------------+------------------+--------------------
+Space     || O(n)                      | O(n)               | O(2n)            | O(2n)                  Note: 2n = n in big o notation but its just to illustrate the doubly links.
+----------++---------------------------+--------------------+------------------+--------------------
+
+
+LL: use for queues and times where you never need to go back, can use linear/circular
+
+DCLL: same as linear LL so is always a good choice, but uses more memory than singly-linked list
+
+
+
+
